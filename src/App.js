@@ -5,7 +5,7 @@ import SelectionMenu from './components/SelectionMenu'
 
 import './App.css';
 
-function App() {
+const App =() => {
   return (
     <div className="App">
       <SelectionMenu/>

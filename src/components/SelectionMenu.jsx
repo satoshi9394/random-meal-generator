@@ -1,8 +1,10 @@
 import React , { Component } from 'react';
-
+import Selector from './Selector';
+import RecipeMain from './RecipeMain';
 
 // informacioncd
-import contactsData from '../utils/recipes'
+import recipes from '../utils/recipes'
+
 
 
 
@@ -10,45 +12,57 @@ class SelectionMenu extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            recipies: [],
+            allrecipies: [],
+            addRecipes: false,
+            id: 0
             
         }
-        this.addContact = this.addContact.bind(this);
+        this.addRecipes = this.addRecipes.bind(this);
 
     }
-    addContact(){
+    addRecipes(){
         this.setState(
-            () => ({contacts: contactsData,}
+            () => ({
+                allrecipies: recipes,
+                addRecipes: true
+                }
             )
-        );       
+        ); 
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+          }
+        this.state.id= getRandomInt(0, 11) 
+
     }
 
 
     render() {
-/*         const card = this.state.contacts.map((contact, idx) => 
-        <ContactCard info={contact}  key={idx}/> );
 
-        let viewCard ;
 
-        if (this.state.contacts.length > 0) {
-            viewCard = <div>{card}</div>
-        }else if(this.state.deleteContact === true){
-            viewCard = <h1>Borraste los contactos</h1>
+        let viewRecipes ;
+
+        if (this.state.addRecipes === true) {
+            viewRecipes = <RecipeMain info={this.state.allrecipies[this.state.id]}/>
         }else{
-            viewCard = <h1>No hay contactos</h1>     
-        } */
+            viewRecipes = <div className="style= display:none"></div>
+        }
+
+        console.log(this.state.Allrecipies)
+        console.log(this.state.id)
 
 
+        
+        
 
         return (
             <div className='container'>
                 <div className="row">
-                    <div className="col s9">
-                        <h1>hola aqui ira la receta</h1>
+                    <div className="col s12">
+                        <Selector clickHandle={this.addRecipes} />
                     </div>
-                    <div className="col s3">
+                    <div className="col s12">
                         <div className="row">
-                            <h2>y aqui ira el boton random</h2>
+                            {viewRecipes}
                         </div>
                     </div>
                 </div>
