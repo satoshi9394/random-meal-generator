@@ -13,14 +13,6 @@ const Selector = (props) => {
                 </h5>
                 <h6>haga click para obtener una receta al azar</h6>
             </div>
-            <div className="col s12">
-                <button 
-                className="btn waves-effect waves-light btn-small"
-                onClick={props.clickHandle}>
-                    <i className="material-icons right">{props.type.icon}</i>
-                    {props.type.name}
-                </button>
-            </div>
         </div>
     )
 }

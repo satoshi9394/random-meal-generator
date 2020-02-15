@@ -4,6 +4,8 @@ import RecipeMain from './RecipeMain';
 
 // informacioncd
 import recipes from '../utils/recipes'
+//botones
+import Btn from '../actions/Btn';
 
 
 
@@ -13,7 +15,7 @@ class SelectionMenu extends Component {
         super(props);
         this.state = {
             allrecipies: [],
-            previwRecipies:[],
+            previwId: 0,
             addRecipes: false,
             id: 0
             
@@ -33,6 +35,7 @@ class SelectionMenu extends Component {
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
           }
+        this.state.previwId = this.state.id;  
         this.state.id= getRandomInt(0, 11) 
 
     }
@@ -40,16 +43,12 @@ class SelectionMenu extends Component {
     returnRecipes(){
         this.setState(
             () => ({
-                allrecipies: recipes,
-                addRecipes: true
+                    id: this.state.previwId,
                 }
             )
         ); 
-        function getRandomInt(min, max) {
-            return Math.floor(Math.random() * (max - min)) + min;
-          }
-        this.state.id= getRandomInt(0, 11) 
-
+        console.log('entre al return')
+        console.log(this.state.id)
     }
 
 
@@ -75,7 +74,13 @@ class SelectionMenu extends Component {
             <div className='container'>
                 <div className="row">
                     <div className="col s12">
-                        <Selector clickHandle={this.addRecipes} />
+                        <Selector  />
+                        <div className="col s6">
+                            <Btn clickHandle={this.addRecipes} type="Obtener receta" icon="cached"/>
+                        </div>
+                        <div className="col s6">
+                            <Btn clickHandle={this.returnRecipes} type="Retroceder" icon="keyboard_return" />
+                        </div>
                     </div>
                     <div className="col s12">
                         <div className="row">

@@ -62,8 +62,8 @@ const RecipeMain = (props) => {
                         url={props.info.mealVideo}
                         className='react-player'
                         playing
-                        width='60%'
-                        height='60%'
+                        width='100%'
+                        height='100vh'
                         />
                     </div>
                 </div>
