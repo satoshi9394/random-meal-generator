@@ -17,7 +17,7 @@ class SelectionMenu extends Component {
             allrecipies: [],
             previwId: [],
             addRecipes: false,
-            id: 0,
+            id: [],
             noMoreRecipies: false,
             
         }
@@ -40,8 +40,9 @@ class SelectionMenu extends Component {
             return y = y.push(x); 
         }
         
-        save(this.state.id, this.state.previwId) 
+        
         this.state.id= getRandomInt(0, 11) 
+        save(this.state.id, this.state.previwId) 
 
     }
 
@@ -69,16 +70,18 @@ class SelectionMenu extends Component {
 
 
         let viewRecipes ;
+        let messenge;
 
         if (this.state.addRecipes === true && this.state.noMoreRecipies===false) {
             viewRecipes = <RecipeMain info={this.state.allrecipies[this.state.id]}/>
+            messenge = <div className="style= display:none"></div>
         }else if(this.state.noMoreRecipies===true){
             this.state.noMoreRecipies = false;
-            viewRecipes = <div><h1>No mas recetas</h1>
-                                <RecipeMain info={this.state.allrecipies[this.state.id]}/>
-                            </div>
+            viewRecipes = <RecipeMain info={this.state.allrecipies[this.state.id]}/>
+            messenge = <h3 className="red darken-3">No hay mas recetas previas</h3>
         }else{
             viewRecipes = <div className="style= display:none"></div>
+            messenge = <div className="style= display:none"></div>
         }
 
         console.log(this.state.Allrecipies)
@@ -94,12 +97,17 @@ class SelectionMenu extends Component {
                 <div className="row">
                     <div className="col s12">
                         <Selector  />
+                    <div className="row">
                         <div className="col s6">
                             <Btn clickHandle={this.addRecipes} type="Obtener receta" icon="cached"/>
                         </div>
                         <div className="col s6">
                             <Btn clickHandle={this.returnRecipes} type="Retroceder" icon="keyboard_return" />
                         </div>
+                    </div>
+                    </div>
+                    <div className="col s12">
+                        {messenge}
                     </div>
                     <div className="col s12">
                         <div className="row">
