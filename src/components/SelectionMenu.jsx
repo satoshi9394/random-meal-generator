@@ -13,14 +13,31 @@ class SelectionMenu extends Component {
         super(props);
         this.state = {
             allrecipies: [],
+            previwRecipies:[],
             addRecipes: false,
             id: 0
             
         }
         this.addRecipes = this.addRecipes.bind(this);
+        this.returnRecipes = this.returnRecipes.bind(this);
 
     }
     addRecipes(){
+        this.setState(
+            () => ({
+                allrecipies: recipes,
+                addRecipes: true
+                }
+            )
+        ); 
+        function getRandomInt(min, max) {
+            return Math.floor(Math.random() * (max - min)) + min;
+          }
+        this.state.id= getRandomInt(0, 11) 
+
+    }
+
+    returnRecipes(){
         this.setState(
             () => ({
                 allrecipies: recipes,

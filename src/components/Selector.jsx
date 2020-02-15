@@ -17,8 +17,8 @@ const Selector = (props) => {
                 <button 
                 className="btn waves-effect waves-light btn-small"
                 onClick={props.clickHandle}>
-                    <i className="material-icons right">add</i>
-                    Obtener receta
+                    <i className="material-icons right">{props.type.icon}</i>
+                    {props.type.name}
                 </button>
             </div>
         </div>
