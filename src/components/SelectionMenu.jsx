@@ -15,9 +15,10 @@ class SelectionMenu extends Component {
         super(props);
         this.state = {
             allrecipies: [],
-            previwId: 0,
+            previwId: [],
             addRecipes: false,
-            id: 0
+            id: 0,
+            noMoreRecipies: false,
             
         }
         this.addRecipes = this.addRecipes.bind(this);
@@ -35,7 +36,11 @@ class SelectionMenu extends Component {
         function getRandomInt(min, max) {
             return Math.floor(Math.random() * (max - min)) + min;
           }
-        this.state.previwId = this.state.id;  
+        function save(x, y) {
+            return y = y.push(x); 
+        }
+        
+        save(this.state.id, this.state.previwId) 
         this.state.id= getRandomInt(0, 11) 
 
     }
@@ -43,10 +48,18 @@ class SelectionMenu extends Component {
     returnRecipes(){
         this.setState(
             () => ({
-                    id: this.state.previwId,
+                    id: this.state.previwId[this.state.previwId.length-1],
                 }
             )
         ); 
+        function rRecipies( y) {
+            return y = y.pop(); 
+        }
+        if(this.state.previwId.length > 1){
+            rRecipies(this.state.previwId)
+        }else{
+            this.state.noMoreRecipies = true
+        }
         console.log('entre al return')
         console.log(this.state.id)
     }
@@ -57,14 +70,20 @@ class SelectionMenu extends Component {
 
         let viewRecipes ;
 
-        if (this.state.addRecipes === true) {
+        if (this.state.addRecipes === true && this.state.noMoreRecipies===false) {
             viewRecipes = <RecipeMain info={this.state.allrecipies[this.state.id]}/>
+        }else if(this.state.noMoreRecipies===true){
+            this.state.noMoreRecipies = false;
+            viewRecipes = <div><h1>No mas recetas</h1>
+                                <RecipeMain info={this.state.allrecipies[this.state.id]}/>
+                            </div>
         }else{
             viewRecipes = <div className="style= display:none"></div>
         }
 
         console.log(this.state.Allrecipies)
         console.log(this.state.id)
+        console.log(this.state.noMoreRecipies)
 
 
         
